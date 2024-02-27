@@ -19,17 +19,10 @@ public class Pizzaria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_PIZZARIA")
-    @SequenceGenerator(
-            name = "SQ_PIZZARIA",
-            sequenceName = "SQ_PIZZARIA",
-            initialValue = 1,
-            allocationSize = 1
-    )
+    @SequenceGenerator(name = "SQ_PIZZARIA")
     @Column(name = "ID_PIZZARIA")
     private Long id;
 
-
-    @Column(name = "NM_PIZZARIA")
     private String nome;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})

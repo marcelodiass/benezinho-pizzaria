@@ -8,6 +8,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+import javax.swing.*;
 import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -23,15 +24,27 @@ public class Main {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory( db );
         EntityManager manager = factory.createEntityManager();
 
-      //  persistir(manager);
+        //  persistir(manager);
 
+//        Long id = Long.valueOf(JOptionPane.showInputDialog("Informe o id da pizzaria: "));
+//
+//        Pizzaria pizzaria = getPizzaria(id, manager);
+//
+//        System.out.println(pizzaria);
 
-        Pizzaria pizzaria = manager.find(Pizzaria.class, 1);
+        //  Consultando todas as pizzarias
 
-        System.out.println(pizzaria);
+        var jpql = "From Pizzaria";
+
+        manager.createQuery(jpql).getResultList().forEach(System.out::println);
+
 
         manager.close();
         factory.close();
+    }
+
+    private static Pizzaria getPizzaria(Long id, EntityManager manager) {
+        return manager.find(Pizzaria.class, id);
     }
 
     private static void persistir(EntityManager manager) {
